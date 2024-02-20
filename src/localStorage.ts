@@ -1,21 +1,21 @@
 export class LocalStorageProvider {
   get(key: string) {
-    const object = localStorage.getItem(key);
+    const object = localStorage.getItem(key)
 
-    if (object) return JSON.parse(object);
+    if (object) return JSON.parse(object)
 
-    return {};
+    return {}
   }
 
-  set(key: string, object: any) {
-    localStorage.setItem(key, JSON.stringify(object));
+  set<T>(key: string, object: T) {
+    localStorage.setItem(key, JSON.stringify(object))
   }
 
   clear() {
-    localStorage.clear();
+    localStorage.clear()
   }
 
   remove(key: string) {
-    localStorage.removeItem(key);
+    localStorage.removeItem(key)
   }
 }

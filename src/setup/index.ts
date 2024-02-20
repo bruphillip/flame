@@ -17,7 +17,7 @@ class Setup {
   }
 
   async config() {
-    await Promise.all(this.actions.map(action => action.setup(this.modules)))
+    await Promise.all(this.actions.map((action) => action.setup(this.modules)))
   }
 }
 

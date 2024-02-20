@@ -10,7 +10,7 @@ export function hookFactory<T>(model: Factory<T>) {
       const subscribed = model.observable.subscribe({
         next(value) {
           set(value)
-        }
+        },
       })
 
       return () => subscribed.unsubscribe()
