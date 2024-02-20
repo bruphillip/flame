@@ -1,6 +1,7 @@
 {
   "name": "flame",
   "version": "1.0.0",
+  "type": "module",
   "main": "./dist/flame.umd.js",
   "module": "./dist/flame.js",
   "types": "./dist/index.d.ts",
@@ -19,7 +20,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite",
-    "build": "vite build"
+    "build": "tsc --declaration && vite build"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.202",
