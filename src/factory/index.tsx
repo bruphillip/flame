@@ -1,5 +1,5 @@
+import { useSyncExternalStore } from 'react'
 import { BehaviorSubject, Observable } from 'rxjs'
-import { useSyncExternalStore } from 'use-sync-external-store'
 
 import { setup } from '../setup'
 
