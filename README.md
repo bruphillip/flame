@@ -1,16 +1,14 @@
-# Project Title
+# 🔥 Flame 🔥
 
-🔥 Flame 🔥 React State Managements based on Rxjs powered by Typescript
+React State Managements based on Rxjs powered by Typescript
 
-## Overview
-
-This project intent to be an option of state management, doing the process of manage state simple as override variable
+## This project intent to be an option of state management, doing the process of manage state simple as override variable
 
 ## Features
 
 - Can be create like classes or function or even hooks
 
-  -- Functions
+  Functions
 
 ```ts
 // Classes
@@ -36,7 +34,7 @@ const userStore = createStore<UserStoreType>({
 })
 ```
 
--- Setup Provider gives you acess to your bases (onUpdate | onInit)
+Setup Provider gives you acess to your bases (onUpdate | onInit)
 
 ```ts
 const userStore = createStore<UserStoreType>(
@@ -60,7 +58,7 @@ function Base() {
 }
 ```
 
--- It can also be iniciated in code
+It can also be iniciated in code
 
 ```ts
 const userStore = createStore<UserStoreType>(
@@ -78,7 +76,7 @@ const userStore = createStore<UserStoreType>(
 setup.config() // just calling this piece
 ```
 
--- And access in classes
+And access in classes
 
 ```ts
 class UserStoreWithOnInit extends Factory<UserStoreType> implements OnInit {
@@ -97,7 +95,7 @@ class UserStoreWithonUpdate
 }
 ```
 
--- Data can also be store in localStorage
+Data can also be store in localStorage
 
 ```ts
 function Component() {
@@ -109,18 +107,16 @@ function Component() {
 }
 ```
 
-### Installation
+###
 
 Step-by-step guide on how to get a development environment running.
 
 ```bash
 # Clone the repository
-git clone https://github.com/bruphillip/flame
+yarn add https://github.com/bruphillip/flame
+```
 
-# Navigate into the directory
-cd flame
-
-# Install dependencies
-npm test || yarn test
-
+```bash
+# Clone the repository
+npm i https://github.com/bruphillip/flame
 ```
