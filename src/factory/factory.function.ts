@@ -20,9 +20,6 @@ class Root<T> extends Factory<T> implements OnInit, OnUpdate<T> {
   }
 }
 
-export function useCreateStore<T>(
-  initialData: T,
-  config?: Config<T>
-): Factory<T> {
+export function createStore<T>(initialData: T, config?: Config<T>): Factory<T> {
   return new Root(initialData, config)
 }

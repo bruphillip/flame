@@ -3,7 +3,7 @@ export {
   type AsyncSetter,
   type SetterCallback,
 } from './factory/factory.abstract'
-export { useCreateStore } from './factory/factory.function'
+export { createStore } from './factory/factory.function'
 export { Factory } from './factory'
 export { hookFactory } from './factory/factory.hook'
 

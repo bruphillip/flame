@@ -13,7 +13,7 @@ describe('[HOOK]', () => {
   test('it should call onInit method', async () => {
     const onUpdate = vi.fn()
 
-    class UserStoreWithOnInit
+    class UserStoreWithonUpdate
       extends Factory<UserStoreType>
       implements OnUpdate<UserStoreType>
     {
@@ -21,7 +21,7 @@ describe('[HOOK]', () => {
         onUpdate(data)
       }
     }
-    new UserStoreWithOnInit({
+    new UserStoreWithonUpdate({
       age: 20,
       email: 'teste@teste',
       name: 'Teste User',
@@ -40,8 +40,8 @@ describe('[HOOK]', () => {
   test('it shouldnt call onInit method', async () => {
     const onUpdate = vi.fn()
 
-    class UserStoreWithOnInit extends Factory<UserStoreType> {}
-    new UserStoreWithOnInit({
+    class UserStoreWithonUpdate extends Factory<UserStoreType> {}
+    new UserStoreWithonUpdate({
       age: 20,
       email: 'teste@teste',
       name: 'Teste User',

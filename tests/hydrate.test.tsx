@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react'
-import { HydrateProvider, useCreateStore } from 'src/index'
+import { HydrateProvider, createStore } from 'src/index'
 import { describe, test, expect } from 'vitest'
 
 describe('[HYDRATE]', () => {
@@ -12,7 +12,7 @@ describe('[HYDRATE]', () => {
 
     test('it shouldnt hydrate the app when store is not passed as a module', async () => {
       async function firstContext() {
-        const userStore = useCreateStore<UserStoreType>({
+        const userStore = createStore<UserStoreType>({
           age: 20,
           email: 'teste@teste',
           name: 'Teste User',
@@ -37,7 +37,7 @@ describe('[HYDRATE]', () => {
       }
 
       async function secondContext() {
-        const userStore = useCreateStore<UserStoreType>({
+        const userStore = createStore<UserStoreType>({
           age: 20,
           email: 'teste@teste',
           name: 'Teste User',
@@ -62,7 +62,7 @@ describe('[HYDRATE]', () => {
 
     test('it should hydrate the app when store is passed as a module', async () => {
       async function firstContext() {
-        const userStore = useCreateStore<UserStoreType>({
+        const userStore = createStore<UserStoreType>({
           age: 20,
           email: 'teste@teste',
           name: 'Teste User',
@@ -87,7 +87,7 @@ describe('[HYDRATE]', () => {
       }
 
       async function secondContext() {
-        const userStore = useCreateStore<UserStoreType>({
+        const userStore = createStore<UserStoreType>({
           age: 20,
           email: 'teste@teste',
           name: 'Teste User',
