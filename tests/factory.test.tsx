@@ -22,17 +22,14 @@ describe('[Factory]', () => {
       expect(factoryImpl.data.name).toBe('New')
     })
 
-    test('it should update when called next(callback parameter)', () => {
+    test('it should update when called next(callback parameter)', async () => {
       const factoryImpl = new Test({ name: 'Teste Name' })
 
       expect(factoryImpl.data.name).toBe('Teste Name')
 
-      factoryImpl.next((prop) => {
-        expect(prop.name).toBe('Teste Name')
-        return {
-          name: 'New',
-        }
-      })
+      await factoryImpl.next(async () => ({
+        name: 'New',
+      }))
 
       expect(factoryImpl.data.name).toBe('New')
     })
