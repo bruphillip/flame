@@ -1,28 +1,23 @@
-import { OnInit } from 'src/onInit/onInit.abstract'
-import { OnUpdate } from 'src/onUpdate/onUpdate.abstract'
+import { useState, useEffect, useMemo } from 'react'
 
 import { Factory } from '.'
 
-export type Config<T> = {
-  onInit?: () => Promise<void>
-  onUpdate?: (data: T) => Promise<void>
-}
+export function hookFactory<T>(model: Factory<T>) {
+  return function useHook(): [T, typeof model.next] {
+    const [state, set] = useState<T>(model.data)
 
-class Root<T> extends Factory<T> implements OnInit, OnUpdate<T> {
-  constructor(initialData: T, private config?: Config<T>) {
-    super(initialData)
-  }
-  public async onUpdate(data: T): Promise<void> {
-    this.config?.onUpdate && (await this.config?.onUpdate(data))
-  }
-  public async onInit(): Promise<void> {
-    this.config?.onInit && (await this.config?.onInit())
-  }
-}
+    useEffect(() => {
+      const subscribed = model.observable.subscribe({
+        next(value) {
+          set(value)
+        },
+      })
 
-export function useCreateStore<T>(
-  initialData: T,
-  config?: Config<T>
-): Factory<T> {
-  return new Root(initialData, config)
+      return () => subscribed.unsubscribe()
+    }, [])
+
+    const setState = useMemo(() => model.next.bind(model), [model])
+
+    return [state, setState]
+  }
 }

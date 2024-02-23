@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react'
+import { render, waitFor } from '@testing-library/react'
 import { Factory } from 'src/factory'
 import { describe, test, expect } from 'vitest'
 
@@ -27,7 +27,7 @@ describe('[Factory]', () => {
 
       expect(factoryImpl.data.name).toBe('Teste Name')
 
-      await factoryImpl.next(async () => ({
+      factoryImpl.next(() => ({
         name: 'New',
       }))
 
@@ -53,7 +53,7 @@ describe('[Factory]', () => {
     })
   })
 
-  describe.only('[COMPONENT]', () => {
+  describe('[COMPONENT]', () => {
     type UserStoreType = {
       name: string
       age: number
@@ -96,7 +96,9 @@ describe('[Factory]', () => {
         const old = await rendered.findByTestId('user-name-updt')
         expect(old.innerHTML).toBe('old')
         userStore.next({ name: 'new' })
-        const value = await rendered.findByTestId('user-name-updt')
+        const value = await waitFor(() =>
+          rendered.findByTestId('user-name-updt')
+        )
 
         expect(value.innerHTML).toBe('new')
         rendered.unmount()
