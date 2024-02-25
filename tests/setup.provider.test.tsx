@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react'
-import { SetupProvider, useCreateStore } from 'src'
+import { SetupProvider, createStore } from 'src'
 import { setup } from 'src/setup'
 import { describe, test, expect, vi } from 'vitest'
 
@@ -15,7 +15,7 @@ describe('[SETUP PROVIDER]', () => {
       const onInitMock = vi.fn()
       const onUpdateMock = vi.fn()
 
-      useCreateStore<UserStoreType>(
+      createStore<UserStoreType>(
         {
           age: 20,
           email: 'teste@teste',
@@ -35,7 +35,7 @@ describe('[SETUP PROVIDER]', () => {
       const onInitMock = vi.fn()
       const onUpdateMock = vi.fn()
 
-      useCreateStore<UserStoreType>(
+      createStore<UserStoreType>(
         {
           age: 20,
           email: 'teste@teste',
@@ -70,7 +70,7 @@ describe('[SETUP PROVIDER]', () => {
       const onInitMock = vi.fn()
       const onUpdateMock = vi.fn()
 
-      const userStore = useCreateStore<UserStoreType>(
+      const userStore = createStore<UserStoreType>(
         {
           age: 20,
           email: 'teste@teste',
@@ -107,7 +107,7 @@ describe('[SETUP PROVIDER]', () => {
       const onInitMock = vi.fn()
       const onUpdateMock = vi.fn()
 
-      const userStore = useCreateStore<UserStoreType>(
+      const userStore = createStore<UserStoreType>(
         {
           age: 20,
           email: 'teste@teste',

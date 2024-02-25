@@ -16,6 +16,7 @@ export default defineConfig({
     clearMocks: true,
     dir: 'tests',
     environment: 'jsdom',
+    exclude: ['node_modules', 'dist'],
     deps: {
       optimizer: {
         web: {

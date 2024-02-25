@@ -1,8 +1,8 @@
 import { defaultTo, get, merge, set } from 'lodash'
 import { Subscription } from 'rxjs'
 
-import { Factory } from './factory'
-import { LocalStorageProvider } from './localStorage'
+import { Factory } from '../factory'
+import { LocalStorageProvider } from '../localStorage'
 
 interface RegisterType {
   [key: string]: Factory<unknown>
@@ -29,11 +29,11 @@ class HydrateModule {
     this._registed = merge(this.registed, module)
   }
 
-  get registed() {
+  get registed(): RegisterType {
     return this._registed
   }
 
-  async setup(modules: Factory<unknown>[]) {
+  async setup<T>(modules: Factory<T>[]) {
     this.register(modules)
     this.hydrate()
     this.subscribe()
@@ -41,12 +41,12 @@ class HydrateModule {
     return () => this.unsubscribe()
   }
 
-  register(modules: Factory<unknown>[]) {
+  register<T>(modules: Factory<T>[]) {
     modules.forEach((module) => {
       const key = Object.getPrototypeOf(module).constructor.name
 
       this.registed = {
-        [key]: module,
+        [key]: module as Factory<unknown>,
       }
     })
   }

@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react'
 import { Factory } from 'src/factory'
-import { hookFactory } from 'src/hook.factory'
+import { hookFactory } from 'src/factory/factory.hook'
 import { describe, test, expect } from 'vitest'
 
 describe('[HOOK]', () => {
