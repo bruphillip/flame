@@ -27,7 +27,7 @@ describe('[Factory]', () => {
 
       expect(factoryImpl.data.name).toBe('Teste Name')
 
-      await factoryImpl.next(async () => ({
+      await factoryImpl.next(() => ({
         name: 'New',
       }))
 
@@ -53,7 +53,7 @@ describe('[Factory]', () => {
     })
   })
 
-  describe.only('[COMPONENT]', () => {
+  describe('[COMPONENT]', () => {
     type UserStoreType = {
       name: string
       age: number
