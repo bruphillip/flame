@@ -24,6 +24,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc --declaration && vite build",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . --ext .ts,.tsx",
     "test": "vitest",
     "test:coverage": "vitest run --coverage"
   },
