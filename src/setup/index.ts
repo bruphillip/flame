@@ -5,15 +5,28 @@ import { onInitSetup } from '../onInit'
 import { onUpdateSetup } from '../onUpdate'
 
 class Setup {
-  private _modules = new BehaviorSubject<Factory<unknown>[]>([])
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private _modules = new BehaviorSubject<Factory<any>[]>([])
   private actions = [onUpdateSetup, onInitSetup]
 
-  get modules() {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  get modules(): Factory<any>[] {
     return this._modules.getValue()
   }
 
-  set module(module: Factory<unknown>) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  set module(module: Factory<any>) {
     this._modules.next([...this.modules, module])
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  remove(module: Factory<any>) {
+    this._modules.next(this.modules.filter((m) => m !== module))
+  }
+
+  reset() {
+    onUpdateSetup.unsubscribe()
+    this._modules.next([])
   }
 
   async config() {

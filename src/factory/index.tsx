@@ -11,6 +11,7 @@ import {
 
 export class Factory<T> extends AbstractFactory<T> {
   protected _subject: BehaviorSubject<T>
+  public key?: string
 
   get observable(): Observable<T> {
     return this._subject.asObservable()
@@ -20,12 +21,18 @@ export class Factory<T> extends AbstractFactory<T> {
     return this._subject.getValue()
   }
 
+  /**
+   * @deprecated Accessing `store.state` invokes a React hook (`useSyncExternalStore`) inside a getter,
+   * which can violate React Rules of Hooks if called outside of render bodies or conditionally.
+   * Prefer using `useStore(store, selector)` or `hookFactory(store)` for idiomatic React consumption.
+   */
   get state(): T {
     return this._state()
   }
 
-  constructor(initialValue: T) {
+  constructor(initialValue: T, key?: string) {
     super()
+    this.key = key
     setup.module = this as Factory<unknown>
     this._subject = new BehaviorSubject(initialValue)
   }

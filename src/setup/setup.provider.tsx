@@ -11,7 +11,14 @@ export function SetupProvider({ children }: SetupProviderProps) {
   const [finished, setFinished] = useState(false)
 
   useEffect(() => {
-    setup.config().finally(() => setFinished(true))
+    let isMounted = true
+    setup.config().finally(() => {
+      if (isMounted) setFinished(true)
+    })
+
+    return () => {
+      isMounted = false
+    }
   }, [])
 
   return finished ? children : <div />

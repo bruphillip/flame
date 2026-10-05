@@ -43,7 +43,9 @@ class HydrateModule {
 
   register<T>(modules: Factory<T>[]) {
     modules.forEach((module) => {
-      const key = Object.getPrototypeOf(module).constructor.name
+      const explicitKey = (module as { key?: string }).key
+      const key =
+        explicitKey || Object.getPrototypeOf(module).constructor.name
 
       this.registed = {
         [key]: module as Factory<unknown>,
@@ -86,6 +88,7 @@ class HydrateModule {
     this.subscriptions.forEach((subscription) => {
       subscription.unsubscribe()
     })
+    this.subscriptions = []
   }
 }
 

@@ -32,6 +32,7 @@ export default defineConfig({
   plugins: [
     react(),
     dts({
+      include: ['src'],
       insertTypesEntry: true,
     }),
     viteTsconfigPaths(),

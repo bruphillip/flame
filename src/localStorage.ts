@@ -1,21 +1,47 @@
 export class LocalStorageProvider {
+  private isAvailable(): boolean {
+    return typeof window !== 'undefined' && typeof localStorage !== 'undefined'
+  }
+
   get(key: string) {
-    const object = localStorage.getItem(key)
+    if (!this.isAvailable()) return {}
 
-    if (object) return JSON.parse(object)
-
-    return {}
+    try {
+      const object = localStorage.getItem(key)
+      if (object) return JSON.parse(object)
+      return {}
+    } catch {
+      return {}
+    }
   }
 
   set<T>(key: string, object: T) {
-    localStorage.setItem(key, JSON.stringify(object))
+    if (!this.isAvailable()) return
+
+    try {
+      localStorage.setItem(key, JSON.stringify(object))
+    } catch {
+      // Ignore write errors (e.g. quota exceeded or disabled storage)
+    }
   }
 
   clear() {
-    localStorage.clear()
+    if (!this.isAvailable()) return
+
+    try {
+      localStorage.clear()
+    } catch {
+      // Ignore storage errors
+    }
   }
 
   remove(key: string) {
-    localStorage.removeItem(key)
+    if (!this.isAvailable()) return
+
+    try {
+      localStorage.removeItem(key)
+    } catch {
+      // Ignore storage errors
+    }
   }
 }

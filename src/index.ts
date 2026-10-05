@@ -6,6 +6,7 @@ export {
 export { createStore } from './factory/factory.function'
 export { Factory } from './factory'
 export { hookFactory } from './factory/factory.hook'
+export { useStore } from './factory/useStore'
 
 export { HydrateModule } from './hydrate'
 

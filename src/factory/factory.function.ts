@@ -9,8 +9,8 @@ export type Config<T> = {
 }
 
 class Root<T> extends Factory<T> implements OnInit, OnUpdate<T> {
-  constructor(initialData: T, private config?: Config<T>) {
-    super(initialData)
+  constructor(initialData: T, private config?: Config<T>, key?: string) {
+    super(initialData, key)
   }
   public async onUpdate(data: T): Promise<void> {
     this.config?.onUpdate && (await this.config?.onUpdate(data))
@@ -20,6 +20,10 @@ class Root<T> extends Factory<T> implements OnInit, OnUpdate<T> {
   }
 }
 
-export function createStore<T>(initialData: T, config?: Config<T>): Factory<T> {
-  return new Root(initialData, config)
+export function createStore<T>(
+  initialData: T,
+  config?: Config<T>,
+  key?: string
+): Factory<T> {
+  return new Root(initialData, config, key)
 }

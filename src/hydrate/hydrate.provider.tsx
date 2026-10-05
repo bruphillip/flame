@@ -10,19 +10,26 @@ interface HydrateProviderProps<T> {
 }
 
 const hydration = new HydrateModule()
+
 export function HydrateProvider<T>({
   children,
   modules,
 }: HydrateProviderProps<T>) {
-  const [isHydrated, setIsHydrated] = useState(false)
+  const [isHydrated, setIsHydrated] = useState(!modules || modules.length === 0)
 
   useEffect(() => {
-    if (modules) {
-      hydration.setup(modules).then(() => setIsHydrated(true))
+    let isMounted = true
+
+    if (modules && modules.length > 0) {
+      hydration.setup(modules).then(() => {
+        if (isMounted) setIsHydrated(true)
+      })
+    } else {
+      setIsHydrated(true)
     }
-    setIsHydrated(true)
 
     return () => {
+      isMounted = false
       hydration.unsubscribe()
     }
   }, [])
